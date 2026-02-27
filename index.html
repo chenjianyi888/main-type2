@@ -16,7 +16,7 @@
         }
         .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
-        /* 顶栏固定 + 导航 + 语言切换（参考个人网页） */
+        /* 顶栏固定 + 导航 + 语言切换 */
         .site-header {
             position: fixed;
             top: 0;
@@ -42,7 +42,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px 20px;
+            gap: 8px 16px;
             flex: 1;
         }
         .nav-item {
@@ -50,11 +50,12 @@
             padding: 8px 12px;
             color: #333;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             transition: background-color 0.2s, color 0.2s;
         }
         .nav-item:hover { background-color: #f5f5f5; }
+        .nav-item.active { background-color: #333; color: #fff; }
 
         .lang-switch {
             position: fixed;
@@ -77,6 +78,15 @@
         .lang-btn.active { background: #333; color: #fff; border-color: #333; }
 
         main { padding: 80px 0 50px; min-height: calc(100vh - 140px); }
+        .section-basic-top { margin-top: 24px; }
+
+        /* 子页面：仅当前激活的显示 */
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
 
         .page-title {
             font-size: 28px;
@@ -85,7 +95,6 @@
             color: #000;
         }
 
-        /* 首页头部：图片 + 姓名职位一行，简介单独成行 */
         .profile-header {
             display: flex;
             gap: 30px;
@@ -109,8 +118,9 @@
         .profile-info { flex: 1; min-width: 0; }
         .profile-info h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #000; }
         .profile-title { font-size: 16px; color: #666; margin-bottom: 0; }
+        .profile-contact { font-size: 14px; color: #333; margin-bottom: 6px; }
+        .profile-contact:last-of-type { margin-bottom: 0; }
         .profile-intro-block { margin-bottom: 24px; }
-        .expertise-section { padding-top: 8px; margin-top: 8px; }
         .profile-intro-block .profile-intro { margin-bottom: 12px; text-align: justify; }
         .profile-intro-block .profile-intro:last-child { margin-bottom: 0; }
         .profile-expertise-title { font-size: 17px; font-weight: 600; margin: 20px 0 10px; color: #000; }
@@ -136,7 +146,6 @@
         .content-section ul { margin-bottom: 12px; padding-left: 22px; }
         .content-section li { margin-bottom: 6px; }
 
-        /* 内容卡片：简约方框，统一配色 */
         .content-card {
             background: #f8f9fa;
             border-radius: 8px;
@@ -147,6 +156,41 @@
         .content-card:last-child { margin-bottom: 0; }
         .content-card h3 { margin-top: 0; }
         .content-card h3:not(:first-child) { margin-top: 16px; }
+        .content-card-rounded {
+            border: 1px solid #b8b8b8;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 0;
+            margin-bottom: 28px;
+        }
+        .content-card-rounded:last-child { margin-bottom: 0; }
+        .content-card-rounded .info-box-header {
+            background: #b8b8b8;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 24px;
+            margin: 0;
+            border-bottom: 1px solid #b8b8b8;
+        }
+        .content-card-rounded .info-box-body { padding: 20px 24px; }
+        .info-box-title { font-size: 18px; margin-bottom: 20px; text-align: center; color: #000; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; margin-bottom: 24px; }
+        .info-block h4 { font-size: 15px; font-weight: 600; margin: 0 0 10px 0; color: #333; padding-bottom: 6px; border-bottom: 1px solid #ddd; }
+        .info-block + .info-block { margin-top: 20px; }
+        .info-block ul.list-plain { margin: 0; }
+        .info-block .list-plain li { margin-bottom: 6px; }
+        .info-block-full { margin-top: 4px; }
+        .info-block-full h4 { margin-bottom: 10px; }
+        .info-text { margin: 0; text-align: justify; line-height: 1.75; }
+        .exp-item { margin-bottom: 22px; }
+        .exp-item:last-child { margin-bottom: 0; }
+        .exp-meta { font-weight: 600; color: #000; margin-bottom: 6px; }
+        .exp-period { color: #555; font-weight: 500; margin-right: 12px; }
+        .exp-desc { margin: 0; text-align: justify; line-height: 1.75; font-size: 14px; }
+        .exp-desc ul { margin: 0; padding-left: 20px; }
+        .exp-desc li { margin-bottom: 4px; }
 
         .list-plain { list-style: none; padding-left: 0; }
         .list-plain li {
@@ -174,7 +218,6 @@
         }
         th { background: #fafafa; font-weight: 600; }
 
-        /* 新闻表格样式 */
         .news-table {
             margin-top: 16px;
             border: 1px solid #e0e0e0;
@@ -198,12 +241,8 @@
             border-bottom: 1px solid #eee;
             transition: background-color 0.15s ease;
         }
-        .news-table tbody tr:last-child {
-            border-bottom: none;
-        }
-        .news-table tbody tr:hover {
-            background-color: #f9f9f9;
-        }
+        .news-table tbody tr:last-child { border-bottom: none; }
+        .news-table tbody tr:hover { background-color: #f9f9f9; }
         .news-table td {
             padding: 14px 16px;
             border: none;
@@ -218,9 +257,74 @@
             font-weight: 500;
             white-space: nowrap;
         }
-        .news-table tbody tr:last-child td {
-            border-bottom: none;
+        .news-table tbody tr:last-child td { border-bottom: none; }
+
+        .news-year {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000;
+            margin-top: 28px;
+            margin-bottom: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
         }
+        h2.page-title + .news-year { margin-top: 12px; }
+        p[style*="text-align:center"] + .news-year { margin-top: 16px; }
+        .news-event-card {
+            border: 1px solid #b8b8b8;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            background: #fafafa;
+            line-height: 1.7;
+        }
+        .news-event-card .news-date { font-weight: 600; color: #333; margin-bottom: 4px; }
+        .news-event-card .news-content { margin: 0; }
+        .news-event-card .news-content ul { margin: 6px 0 0 0; padding-left: 20px; }
+        .news-event-card .news-content ul.list-plain { padding-left: 20px; }
+        .news-event-card .news-content + .news-card-list { margin-top: 6px; }
+
+        .project-card {
+            border: 1px solid #b8b8b8;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            background: #fafafa;
+            line-height: 1.7;
+        }
+        .project-card h3 { font-size: 16px; margin: 0 0 10px 0; color: #000; font-weight: 600; }
+        .project-card ul { margin: 0; padding-left: 20px; }
+        .project-card li { margin-bottom: 4px; }
+        .project-card p { margin: 0 0 8px 0; }
+        .project-card p:last-child { margin-bottom: 0; }
+
+        .papers-intro { margin: 0 0 12px 0; color: #555; font-size: 14px; }
+        .paper-item {
+            border: 1px solid #b8b8b8;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            background: #fafafa;
+            line-height: 1.6;
+        }
+        .paper-title { font-weight: 500; color: #000; margin: 0 0 4px 0; }
+        .paper-meta { font-size: 13px; color: #555; margin: 0; }
+        .patent-table-wrap { margin-top: 12px; overflow-x: auto; }
+        .patent-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            border: 1px solid #b8b8b8;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .patent-table th, .patent-table td { padding: 10px 12px; border-bottom: 1px solid #e8e8e8; text-align: left; }
+        .patent-table th { background: #f0f0f0; font-weight: 600; }
+        .patent-table tbody tr:last-child td { border-bottom: none; }
+        .patent-table td:first-child { white-space: nowrap; width: 90px; }
+        .patent-table td:nth-child(3) { white-space: nowrap; width: 120px; }
+        .patent-table td:nth-child(4) { white-space: nowrap; width: 140px; }
+
         a { color: #0066cc; text-decoration: none; }
         a:hover { text-decoration: underline; }
 
@@ -242,6 +346,7 @@
             .lang-switch { right: 16px; top: 14px; }
             .profile-header { flex-direction: column; gap: 20px; align-items: center; }
             .profile-photo img { width: 150px; max-height: 200px; }
+            .info-grid { grid-template-columns: 1fr; gap: 20px; }
             .news-table td:first-child { width: auto; min-width: 0; white-space: normal; }
             .news-table th, .news-table td { padding: 10px 12px; }
         }
@@ -251,12 +356,11 @@
     <header class="site-header">
         <div class="header-inner">
             <nav class="main-nav">
-                <a href="#home" class="nav-item" data-zh="关于我" data-en="About Me">关于我</a>
-                <a href="#work" class="nav-item" data-zh="项目与成果" data-en="Work">项目与成果</a>
-                <a href="#profile" class="nav-item" data-zh="教育与任职" data-en="Profile">教育与任职</a>
-                <a href="#recruitment" class="nav-item" data-zh="博士后招聘" data-en="Recruitment">博士后招聘</a>
-                <a href="#news" class="nav-item" data-zh="近期新闻" data-en="News">近期新闻</a>
-                <a href="#contact" class="nav-item" data-zh="联系方式" data-en="Contact">联系方式</a>
+                <a href="#basic" class="nav-item active" data-page="basic" data-zh="基本信息" data-en="Basic Info">基本信息</a>
+                <a href="#news" class="nav-item" data-page="news" data-zh="最新动态" data-en="News">最新动态</a>
+                <a href="#projects" class="nav-item" data-page="projects" data-zh="项目与荣誉" data-en="Projects & Honors">项目与荣誉</a>
+                <a href="#papers" class="nav-item" data-page="papers" data-zh="论文与专利" data-en="Papers & Patents">论文与专利</a>
+                <a href="#recruitment" class="nav-item" data-page="recruitment" data-zh="博士后招聘" data-en="Postdoc Recruitment">博士后招聘</a>
             </nav>
         </div>
     </header>
@@ -267,62 +371,328 @@
 
     <main>
         <div class="container">
-            <!-- 首页 -->
-            <section id="home">
+            <!-- 1. 基本信息 -->
+            <section id="section-basic" class="page-section active">
                 <div class="content-zh">
-                    <div class="profile-header">
+                    <div class="profile-header section-basic-top">
                         <div class="profile-photo">
                             <img src="20211011091226.jpg" alt="武亚强" title="武亚强 (Adam Wu)">
                         </div>
                         <div class="profile-info">
                             <h1>武亚强 (Adam Wu)</h1>
-                            <p class="profile-title">联想人工智能技术中心 高级总监</p>
+                            <p class="profile-contact"><strong>邮箱：</strong> <a href="mailto:wuyqe@lenovo.com">wuyqe@lenovo.com</a></p>
+                            <p class="profile-contact"><strong>谷歌学术：</strong> <a href="https://scholar.google.com/citations?hl=en&user=vlsW3iwAAAAJ" target="_blank" rel="noopener">Google Scholar</a></p>
+                            <p class="profile-contact"><strong>领英：</strong> <a href="https://www.linkedin.com/in/wuadam/" target="_blank" rel="noopener">LinkedIn</a></p>
                         </div>
                     </div>
                     <div class="profile-intro-block">
-                        <p class="profile-intro">我是一名拥有<strong>20年行业经验</strong>的资深<strong>人工智能研究与落地领导者</strong>，深耕人工智能、机器学习、<strong>多媒体信息处理</strong>及大语言模型（LLM）领域的创新落地。现任联想人工智能技术中心团队模型编排，多智能体协作两大方向负责人，带领AI工程师与架构师团队，聚焦将前沿研究转化为高价值产品。</p>
-                        <p class="profile-intro">核心技术方向包括<strong>多媒体技术、人机交互、人工智能</strong>，深耕<strong>企业级AI</strong>领域。</p>
-                        <h3 class="profile-expertise-title">💻 核心专长 & 技术栈</h3>
-                        <p class="profile-intro">核心研究方向为<strong>多媒体理解</strong>及其在企业领域的应用，技术专长覆盖：</p>
-                        <ul class="list-plain">
-                            <li><strong>大语言模型（LLM/AIGC）：</strong>含LLM微调、提示工程</li>
-                            <li><strong>数字人与虚实融合（XR）：</strong>空间计算、多设备自然融合交互</li>
-                            <li><strong>多媒体信息处理：</strong>计算机视觉、深度学习</li>
-                            <li><strong>AI架构：</strong>端云一体化平台、异构知识系统</li>
+                        <p class="profile-intro">我是一名拥有<strong>20年行业经验</strong>的资深<strong>人工智能研究与落地领导者</strong>，深耕人工智能、机器学习、多媒体信息处理及大语言模型（LLM）领域的创新落地，现任联想人工智能技术中心团队模型编排与多智能体协作方向负责人，带领团队将前沿研究转化为高价值产品。</p>
+                    </div>
+                    <h3 class="news-year">任职与学会</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">现任职务</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>联想集团人工智能中心 高级总监</li>
+                                <li>西安交通大学计算机学院 兼职教授</li>
+                                <li>中国科学院 正高级工程师</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">专业学会</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>中国计算机学会 杰出会员</li>
+                                <li>电气电子工程师学会 高级会员</li>
+                                <li>中国人工智能学会 高级会员</li>
+                                <li>中国计算机学会 多媒体技术专委会 常务委员</li>
+                                <li>中国图象图形学学会 文档分析与识别专委会 常务委员</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">学术服务</p>
+                        <p class="news-content">科技部人工智能2030评审专家，科学院发展路线图评审专家，工信部海外高层次人才专项评审专家。</p>
+                    </div>
+                    <h3 class="news-year">核心技术方向</h3>
+                    <div class="news-event-card">
+                        <p class="news-content">核心技术方向包括多媒体技术、人机交互、人工智能，深耕企业级AI领域。技术专长覆盖：</p>
+                        <ul class="list-plain news-card-list">
+                            <li>大语言模型（LLM/AIGC）：含LLM微调、提示工程</li>
+                            <li>数字人与虚实融合（XR）：空间计算、多设备自然融合交互</li>
+                            <li>多媒体信息处理：计算机视觉、深度学习</li>
+                            <li>AI架构：端云一体化平台、异构知识系统</li>
                         </ul>
+                    </div>
+                    <h3 class="news-year">教育经历</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">西安交通大学</p>
+                        <p class="news-content"><strong>学位：</strong>博士学位、硕士学位、学士学位 &nbsp;|&nbsp; <strong>专业：</strong>计算机与信息工程</p>
+                    </div>
+                    <h3 class="news-year">工作经历</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">2021-至今 · 高级总监，联想集团</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>搭建联想人工智能协同调度平台</li>
+                                <li>主导联想裸眼 3D 技术从 0 到 1 的研发落地</li>
+                                <li>推动文本识别技术赋能联想全产品线</li>
+                                <li>将教育智能技术拓展至车载智能与服务智能领域，助力联想传统企业业务实现人工智能转型</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">2017-2021 · 总监，联想集团</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>领导联想智慧教育平台及全套解决方案，实现从 0 到 1 的构建落地</li>
+                                <li>相关产品市场份额位居行业前五（智慧教育显示设备领域位列前三）</li>
+                                <li>产品已覆盖亚太、北美、印度等地区的万余所学校</li>
+                                <li>虚实融合技术成功应用于冬奥会项目，并获官方感谢信表彰</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">2014-2017 · 开发经理，联想集团</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>主导传统设备的智能化转型工作</li>
+                                <li>首创业内首款双芯片架构 LTE 真无线蓝牙耳机（支持独立联网及语音交互功能）</li>
+                                <li>为联想无人零售店研发视觉识别智能零售终端，支持识别十余类商品，攻克商品遮挡、识别混淆等技术难题</li>
+                                <li>智能扫描技术实现年装机量超千万台的规模化应用</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">2006-2014 · 经理，联想集团</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>领导联想设备协同战略级项目</li>
+                                <li>提出跨系统多设备互联的云融合解决方案</li>
+                                <li>为核心业务发展提供强力赋能，方案已服务超 8 亿用户</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="content-en">
-                    <div class="profile-header">
+                    <div class="profile-header section-basic-top">
                         <div class="profile-photo">
                             <img src="20211011091226.jpg" alt="Adam Wu" title="Adam Wu (武亚强)">
                         </div>
                         <div class="profile-info">
-                            <h1>👋 Hi, I'm Adam Wu (武亚强)</h1>
-                            <p class="profile-title">Executive Director, Lenovo AI Technology Center</p>
+                            <h1>Adam Wu (武亚强)</h1>
+                            <p class="profile-contact"><strong>Email:</strong> <a href="mailto:wuyqe@lenovo.com">wuyqe@lenovo.com</a></p>
+                            <p class="profile-contact"><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?hl=en&user=vlsW3iwAAAAJ" target="_blank" rel="noopener">Google Scholar</a></p>
+                            <p class="profile-contact"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/wuadam/" target="_blank" rel="noopener">LinkedIn</a></p>
                         </div>
                     </div>
                     <div class="profile-intro-block">
-                        <p class="profile-intro">I am a highly accomplished <strong>AI Engineering leader</strong> with <strong>20 years</strong> of experience in driving innovation across AI, Machine Learning, <strong>Multimedia Information Processing</strong>, and Large Language Models (LLM). As the leader of the Model Orchestration and Multi-Agent Collaboration directions at Lenovo AI Technology Center, I lead a team of <strong>AI engineers and architects</strong> to transform cutting-edge research into high-value products.</p>
-                        <p class="profile-intro">My main technical directions include <strong>Multimedia Technology, Human-Computer Interaction, and Artificial Intelligence</strong>, with a focus on <strong>Enterprise AI</strong>.</p>
-                        <h3 class="profile-expertise-title">💻 Core Expertise & Tech Stack</h3>
-                        <p class="profile-intro">My primary focus is on <strong>Multimedia Understanding</strong> and its application in enterprise sectors. My technical expertise spans:</p>
-                        <ul class="list-plain">
-                            <li><strong>Large Language Models (LLM/AIGC):</strong> LLM fine-tuning, Prompt Engineering</li>
-                            <li><strong>Digital Human and Virtual-Real Fusion (XR):</strong> Spatial Computing, Multi-device Natural Fusion Interaction</li>
-                            <li><strong>Multimedia Information Processing:</strong> Computer Vision, Deep Learning</li>
-                            <li><strong>AI Architecture:</strong> End-Cloud integrated platforms, Heterogeneous Knowledge Systems</li>
+                        <p class="profile-intro">I am a highly accomplished <strong>AI Engineering leader</strong> with <strong>20 years</strong> of experience in driving innovation across AI, Machine Learning, Multimedia Information Processing, and Large Language Models (LLM). I lead the Model Orchestration and Multi-Agent Collaboration directions at Lenovo AI Technology Center and work with my team to transform cutting-edge research into high-value products.</p>
+                    </div>
+                    <h3 class="news-year">Positions &amp; Societies</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Current Positions</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>Lenovo Group AI Center, Senior Director</li>
+                                <li>Xi'an Jiaotong University, School of Computer Science, Adjunct Professor</li>
+                                <li>Chinese Academy of Sciences, Senior Engineer</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Professional Societies</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>China Computer Federation (CCF), Distinguished Member</li>
+                                <li>IEEE, Senior Member</li>
+                                <li>Chinese Association for Artificial Intelligence (CAAI), Senior Member</li>
+                                <li>CCF Multimedia Technology Committee, Standing Committee Member</li>
+                                <li>CSIG Document Analysis and Recognition Committee, Standing Committee Member</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Academic Service</p>
+                        <p class="news-content">Expert reviewer for MoST AI 2030 initiatives, CAS development roadmap, and MIIT overseas high-level talent programs.</p>
+                    </div>
+                    <h3 class="news-year">Core Technical Directions</h3>
+                    <div class="news-event-card">
+                        <p class="news-content">Core technical directions include <strong>multimedia technology, human-computer interaction, and artificial intelligence</strong>, with a focus on enterprise AI. Areas of expertise include:</p>
+                        <ul class="list-plain news-card-list">
+                            <li><strong>Large Language Models (LLM/AIGC):</strong> LLM fine-tuning, prompt engineering</li>
+                            <li><strong>Digital Human and Virtual-Real Fusion (XR):</strong> spatial computing, multi-device natural fusion interaction</li>
+                            <li><strong>Multimedia Information Processing:</strong> computer vision, deep learning</li>
+                            <li><strong>AI Architecture:</strong> end-cloud integrated platforms, heterogeneous knowledge systems</li>
                         </ul>
+                    </div>
+                    <h3 class="news-year">Education</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Xi'an Jiaotong University</p>
+                        <p class="news-content"><strong>Degrees:</strong> Ph.D., M.S., B.S. &nbsp;|&nbsp; <strong>Major:</strong> Computer and Information Engineering</p>
+                    </div>
+                    <h3 class="news-year">Work Experience</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">2021–Present · Senior Director, Lenovo</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>Building Lenovo's AI orchestration platform</li>
+                                <li>Leading R&D of Lenovo's naked-eye 3D technology from 0 to 1</li>
+                                <li>Driving document intelligence across Lenovo's product line</li>
+                                <li>Extending smart education technologies to in-vehicle and service intelligence, enabling AI transformation for Lenovo's enterprise business</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">2017–2021 · Director, Lenovo</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>Led the Lenovo Smart Education platform and full solution from 0 to 1</li>
+                                <li>Related products reached top five in market share (top three in smart education display devices)</li>
+                                <li>Deployed across 10,000+ schools in Asia-Pacific, North America, and India</li>
+                                <li>Virtual-real fusion technology applied in Winter Olympics projects with official recognition</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">2014–2017 · Development Manager, Lenovo</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>Led intelligent transformation of traditional devices</li>
+                                <li>Pioneered the industry's first dual-chip LTE true wireless Bluetooth earbuds (standalone connectivity and voice interaction)</li>
+                                <li>Developed vision-based smart retail terminals for Lenovo unmanned stores, supporting 10+ product categories and addressing occlusion and confusion</li>
+                                <li>Smart scanning technology reached 10M+ annual deployments</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">2006–2014 · Manager, Lenovo</p>
+                        <div class="news-content">
+                            <ul class="list-plain">
+                                <li>Led Lenovo's strategic device collaboration initiative</li>
+                                <li>Proposed cloud-integrated multi-device connectivity across systems</li>
+                                <li>Empowered core business with solutions serving 800M+ users</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 项目与成果（核心项目 + 奖项荣誉） -->
-            <section id="work" class="content-section">
+            <!-- 2. 最新动态 -->
+            <section id="section-news" class="page-section">
                 <div class="content-zh">
-                    <h2>🛠️ 项目与成果</h2>
-                    <p style="text-align:center; margin-bottom: 24px; color: #555;">作为技术负责人及首席架构师，主导的项目取得显著商业与社会价值</p>
-                    <div class="content-card">
+                    <h2 class="page-title">最新动态</h2>
+                    <h3 class="news-year">2026</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">1月8日</p>
+                        <p class="news-content">联想在CES发布首款个人超级AI智能体Qira，3大核心技术中「模型编排」「多智能体协作」2项由我团队研发。 <a href="https://news.sina.com.cn/sx/2026-01-08/detail-inhfqtyr6702300.shtml" target="_blank" rel="noopener">[链接]</a></p>
+                    </div>
+                    <h3 class="news-year">2025</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">11月10日</p>
+                        <p class="news-content">西交-联想产业AI实验室3篇论文被AAAI 2026录用，其中联想主导1篇，西安交大主导2篇。</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">10月21日</p>
+                        <p class="news-content">「超写实数字人技术」项目顺利通过北京市科技计划综合绩效评价。</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">5月9日</p>
+                        <p class="news-content">受邀在2025中国图象图形大会「文字识别与文档智能」论坛作题为“从任务专用到通用化：基础模型时代的图像分割演进”的特邀报告。</p>
+                    </div>
+                    <h3 class="news-year">2024</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">6月25日</p>
+                        <p class="news-content">自研向量模型<strong>Zhihui_LLM_Embedding</strong>以76.7分登顶<strong>MTEB检索榜单（全球第一）</strong>。</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">3月31日</p>
+                        <p class="news-content">受邀在第一届中国具身智能大会（CEAI 2024）「具身智能与智能汽车」分论坛做技术报告。</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">3月17日</p>
+                        <p class="news-content">「智慧教学环境构建中虚实融合关键技术及重大应用」项目获<strong>2023年产学研合作创新成果一等奖</strong>。</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">1月9日</p>
+                        <p class="news-content">团队研发的<strong>车载智能助手</strong>在<strong>CES 2024</strong>首发，搭载自研数字人生成、知识增强车载大模型。</p>
+                    </div>
+                    <h3 class="news-year">2023</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">9月27日</p>
+                        <p class="news-content">「数实融合精准导学关键技术及应用」项目获<strong>CCF科技进步一等奖</strong>。</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">6月19日</p>
+                        <p class="news-content">团队斩获国际文档分析与识别大会（ICDAR）主办的<strong>通用文档理解（DUDE）</strong>学术竞赛冠军。</p>
+                    </div>
+                    <h3 class="news-year">2022</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">12月27日</p>
+                        <p class="news-content">团队智慧教育解决方案获评<strong>量子位年度AI最佳解决方案TOP 10</strong>。</p>
+                    </div>
+                </div>
+                <div class="content-en">
+                    <h2 class="page-title">Latest News</h2>
+                    <h3 class="news-year">2026</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Jan 8</p>
+                        <p class="news-content">Lenovo launched its first personal super AI agent Qira at CES; 2 of the 3 core technologies—Model Orchestration and Multi-agent Collaboration—were developed by my team. <a href="https://news.sina.com.cn/sx/2026-01-08/detail-inhfqtyr6702300.shtml" target="_blank" rel="noopener">[Link]</a></p>
+                    </div>
+                    <h3 class="news-year">2025</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Nov 10</p>
+                        <p class="news-content">3 papers from the XJTU-Lenovo Industrial AI Lab were accepted by AAAI 2026 (1 led by Lenovo, 2 led by Xi'an Jiaotong University).</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Oct 21</p>
+                        <p class="news-content">The "Ultra-realistic Digital Human Technology" project successfully passed the comprehensive performance evaluation of Beijing Science and Technology Program.</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">May 9</p>
+                        <p class="news-content">Invited to deliver a keynote speech titled "From Task-Specific to Generalization: Evolution of Image Segmentation in the Foundation Model Era" at the "Text Recognition and Document Intelligence" forum of China Graphics Conference 2025.</p>
+                    </div>
+                    <h3 class="news-year">2024</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Jun 25</p>
+                        <p class="news-content">Self-developed vector model <strong>Zhihui_LLM_Embedding</strong> scored 76.7, topping the <strong>MTEB Retrieval Leaderboard (1st Place)</strong>.</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Mar 31</p>
+                        <p class="news-content">Invited to deliver a technical report at the "Embodied AI and Smart Vehicles" sub-forum at the 1st China Embodied AI Conference (CEAI 2024).</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Mar 17</p>
+                        <p class="news-content">Project "Key Technology and Major Applications of Virtual-Real Fusion in Smart Teaching Environment Construction" won <strong>First Prize of the 2023 Industry-University-Research Cooperation Innovation Award</strong>.</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Jan 9</p>
+                        <p class="news-content">Team's R&D of the <strong>In-Vehicle Smart Assistant</strong> debuted at <strong>CES 2024</strong>, featuring self-developed Digital Human generation and knowledge-enhanced in-car LLM.</p>
+                    </div>
+                    <h3 class="news-year">2023</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Sep 27</p>
+                        <p class="news-content">Project "Digital-Real Fusion for Precise Guided Learning Key Technologies and Applications" won <strong>First Prize of the CCF Science and Technology Progress Award</strong>.</p>
+                    </div>
+                    <div class="news-event-card">
+                        <p class="news-date">Jun 19</p>
+                        <p class="news-content">Team won the <strong>Document Understanding of Everything (DUDE)</strong> academic competition organized by ICDAR (International Conference on Document Analysis and Recognition).</p>
+                    </div>
+                    <h3 class="news-year">2022</h3>
+                    <div class="news-event-card">
+                        <p class="news-date">Dec 27</p>
+                        <p class="news-content">Team's Smart Education Solution was named a <strong>Qubit Annual AI Best Solution TOP 10</strong>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 项目与荣誉 -->
+            <section id="section-projects" class="page-section">
+                <div class="content-zh">
+                    <h2 class="page-title">项目与荣誉</h2>
+                    <h3 class="news-year">主导项目</h3>
+                    <div class="project-card">
                         <h3>2024至今 公司AI战略拆解执行，从0开始构建联想AI多智能体与大模型编排平台研发</h3>
                         <ul>
                             <li><strong>核心方向：</strong> 主导大模型/AIGC在核心AI智能体平台的研发与应用。</li>
@@ -334,7 +704,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="content-card">
+                    <div class="project-card">
                         <h3>2018至2023 从0到1构建并规模化落地联想智慧教育一体化解决方案</h3>
                         <ul>
                             <li><strong>角色：</strong> 研发负责人、首席架构师</li>
@@ -342,7 +712,7 @@
                             <li><strong>奖项：</strong> 项目获2024年中国产学研合作创新成果一等奖。</li>
                         </ul>
                     </div>
-                    <div class="content-card">
+                    <div class="project-card">
                         <h3>2016至2023 联想Document AI核心技术攻关与全产品线落地</h3>
                         <ul>
                             <li><strong>技术突破：</strong> 攻克复杂文档识别、屏幕文本理解、高精度文档定位等核心技术，中文识别精度达业界第一。</li>
@@ -350,24 +720,38 @@
                             <li><strong>产业落地：</strong> 相关Document AI技术已全面落地联想全线产品，实现技术规模化商业应用。</li>
                         </ul>
                     </div>
-                    <div class="content-card">
-                        <h3>🏆 奖项、竞赛 & 荣誉</h3>
-                        <p>工作成果获多项顶级行业与学术荣誉：</p>
+                    <h3 class="news-year">获奖与荣誉</h3>
+                    <div class="project-card">
+                        <h3>团队荣誉</h3>
                         <ul class="list-plain">
-                            <li><strong>核心专利成果：</strong> 4项联想集团最有价值专利发明人。</li>
-                            <li><strong>竞赛冠军：</strong> 10+项 国际竞赛冠军（ICDAR、ICPR）。</li>
-                            <li><strong>技术奖项：</strong> 2024年 中国产学研合作创新成果一等奖；2023年 中国计算机学会（CCF）科技进步一等奖；2021年 北京市科学技术奖二等奖；2020年 吴文俊人工智能科技进步二等奖。</li>
-                            <li><strong>专利布局：</strong> 全球授权发明专利 100+项。</li>
+                            <li>带领团队斩获 ICDAR 国际文档分析与识别竞赛 10 项荣誉</li>
+                            <li>荣获中国产学研合作创新成果一等奖，中国计算机学会科技进步一等奖、吴文俊人工智能科技奖二等奖等省部级学会奖项 5 项</li>
+                            <li>累计申请与授权发明专利超 140 项，其中包含 17 项美国专利，4 项专利获联想「最有价值专利（MVP）」</li>
+                            <li>技术成果获 Fast Company「Next Big Thing in Tech」、量子位「人工智能十佳解决方案」等国际与行业权威认证</li>
+                        </ul>
+                    </div>
+                    <div class="project-card">
+                        <h3>个人荣誉</h3>
+                        <ul class="list-plain">
+                            <li>2024 中国产学研合作创新成果一等奖</li>
+                            <li>2023 中国计算机学会科技进步一等奖</li>
+                            <li>2022 Fast Company，Next Big Thing in Tech，Winner</li>
+                            <li>2022 量子位，人工智能十佳解决方案</li>
+                            <li>2021 北京市，科学技术进步奖二等奖</li>
+                            <li>2020 人工智能学会，吴文俊人工智能科技进步奖二等奖</li>
+                            <li>2006～至今，联想研究院：获得 2 次联想研究院杰出领导者（2016，2018），带领团队获得 1 次联想集团优秀团队（2021），5 次联想研究院杰出团队（2016，2017，2020，2022，2023）</li>
+                            <li>2019～至今，10 项国际文档分析与识别竞赛冠军（ICDAR2019，ICDAR2021，ICPR2020，ICDAR2023）</li>
                         </ul>
                     </div>
                 </div>
                 <div class="content-en">
-                    <h2>🛠️ Work & Achievements</h2>
+                    <h2 class="page-title">Projects & Honors</h2>
                     <p style="text-align:center; margin-bottom: 24px; color: #555;">As the technical lead and chief architect, my projects have achieved significant commercial and societal impact</p>
-                    <div class="content-card">
+                    <h3 class="news-year">Key Projects</h3>
+                    <div class="project-card">
                         <h3>2024-Present: Lenovo AI Strategy Execution & AI Agent/LLM Orchestration Platform Development</h3>
                         <ul>
-                            <li><strong>Focus:</strong> Leading R&D and application of LLMs/AIGC in the core AI Agent platform, and building Lenovo's Document AI technology system for industrialization.</li>
+                            <li><strong>Focus:</strong> Leading R&D and application of LLMs/AIGC in the core AI Agent platform.</li>
                             <li><strong>Achievements:</strong>
                                 <ul>
                                     <li><strong>MTEB Ranking #1:</strong> Self-developed vector model Zhihui_LLM_Embedding scored 76.7, topping the MTEB Retrieval Leaderboard (June 2024).</li>
@@ -376,7 +760,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="content-card">
+                    <div class="project-card">
                         <h3>2018-2023: Lenovo Smart Education Integrated Solution (From 0 to Large-Scale Deployment)</h3>
                         <ul>
                             <li><strong>Role:</strong> R&D Lead, Chief Architect</li>
@@ -384,165 +768,214 @@
                             <li><strong>Awards:</strong> Won the First Prize of China Industry-University-Research Cooperation Innovation Award (2024).</li>
                         </ul>
                     </div>
-                    <div class="content-card">
+                    <div class="project-card">
                         <h3>2016-2023: Lenovo Document AI Core Technology R&D & Full Product Line Deployment</h3>
                         <ul>
                             <li><strong>Technical Breakthroughs:</strong> Overcame core technologies such as complex document recognition, screen text understanding, and high-precision document positioning, with industry-leading Chinese recognition accuracy.</li>
-                            <li><strong>Competition Achievements:</strong> Won 10+ first prizes in international top document intelligence competitions (ICDAR, ICPR), including the ICDAR 2023 DUDE (Document Understanding of Everything) championship.</li>
+                            <li><strong>Competition Achievements:</strong> Won 10+ first prizes in international top document intelligence competitions (ICDAR, ICPR), including the ICDAR 2023 DUDE championship.</li>
                             <li><strong>Industrial Deployment:</strong> Related Document AI technologies have been fully deployed across Lenovo's entire product line, achieving large-scale commercial application.</li>
                         </ul>
                     </div>
-                    <div class="content-card">
-                        <h3>🏆 Awards, Competitions & Recognition</h3>
-                        <p>My work has been recognized with numerous top-tier industry and academic honors:</p>
+                    <h3 class="news-year">Awards & Honors</h3>
+                    <div class="project-card">
+                        <h3>Team Honors</h3>
                         <ul class="list-plain">
-                            <li><strong>Key IP Achievement:</strong> Inventor of 4 of Lenovo's Most Valuable Patents.</li>
-                            <li><strong>Competition Champion:</strong> 10+ International Competition Championships (ICDAR, ICPR).</li>
-                            <li><strong>Technology Awards:</strong> First Prize in China Industry-University-Research Innovation (2024); First Prize of CCF Science and Technology Progress Award (2023); Second Prize of Beijing Science and Technology Award (2021); Second Prize of Wu Wenjun AI Technology Award (2020).</li>
-                            <li><strong>Patents & IP:</strong> Over 100 authorized invention patents globally.</li>
+                            <li>Led the team to 10 ICDAR (International Conference on Document Analysis and Recognition) awards</li>
+                            <li>First Prize of China Industry-University-Research Cooperation Innovation Award, First Prize of CCF Science and Technology Progress Award, Second Prize of Wu Wenjun AI Science and Technology Award, and 5 other provincial/society-level awards</li>
+                            <li>Over 140 patent applications and grants, including 17 U.S. patents; 4 patents awarded Lenovo "Most Valuable Patent (MVP)"</li>
+                            <li>Technical achievements recognized by Fast Company "Next Big Thing in Tech," Qubit "AI Top 10 Solutions," and other international and industry accolades</li>
+                        </ul>
+                    </div>
+                    <div class="project-card">
+                        <h3>Personal Honors</h3>
+                        <ul class="list-plain">
+                            <li>2024 First Prize, China Industry-University-Research Cooperation Innovation Award</li>
+                            <li>2023 First Prize, CCF Science and Technology Progress Award</li>
+                            <li>2022 Fast Company, Next Big Thing in Tech, Winner</li>
+                            <li>2022 Qubit, AI Top 10 Solutions</li>
+                            <li>2021 Beijing Municipal Science and Technology Progress Award, Second Prize</li>
+                            <li>2020 CAAI Wu Wenjun AI Science and Technology Progress Award, Second Prize</li>
+                            <li>2006–Present, Lenovo Research: 2× Lenovo Research Outstanding Leader (2016, 2018); led team to 1× Lenovo Group Outstanding Team (2021), 5× Lenovo Research Outstanding Team (2016, 2017, 2020, 2022, 2023)</li>
+                            <li>2019–Present, 10 International Document Analysis and Recognition Competition championships (ICDAR 2019, ICDAR 2021, ICPR 2020, ICDAR 2023)</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- 教育与任职（教育背景 + 学术任职） -->
-            <section id="profile" class="content-section">
+            <!-- 4. 论文与专利 -->
+            <section id="section-papers" class="page-section">
                 <div class="content-zh">
-                    <h2>🎓 教育与任职</h2>
-                    <div class="content-card">
-                        <h3>教育背景</h3>
-                        <ul class="list-plain">
-                            <li><strong>西安交通大学</strong> — 博士、硕士、学士，计算机与信息工程</li>
-                        </ul>
+                    <h2 class="page-title">论文与专利</h2>
+                    <h3 class="news-year">代表论文</h3>
+                    <p class="papers-intro">以下为部分代表论文，完整列表见 <a href="https://scholar.google.com/citations?hl=en&user=vlsW3iwAAAAJ" target="_blank" rel="noopener">Google Scholar</a>。</p>
+                    <div class="paper-item">
+                        <p class="paper-title">SketchVL: Policy Optimization via Fine-Grained Credit Assignment for Chart Understanding and More</p>
+                        <p class="paper-meta">M Huang, L Zhang, Y Li, Y Wu, J Liu. arXiv preprint arXiv:2601.05688, 2026.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>🌟 学术 & 专业任职</h3>
-                        <ul class="list-plain">
-                            <li><strong>兼职教授：</strong> 西安交通大学计算机学院</li>
-                            <li><strong>高级会员：</strong> 电气和电子工程师协会（IEEE）</li>
-                            <li><strong>杰出会员：</strong> 中国计算机学会（CCF）</li>
-                            <li><strong>常务委员：</strong> CCF多媒体技术专委会</li>
-                            <li><strong>常务委员：</strong> CSIG文档分析与识别专委会</li>
-                        </ul>
+                    <div class="paper-item">
+                        <p class="paper-title">Empowering multimodal llms with external tools: A comprehensive survey</p>
+                        <p class="paper-meta">W An, J Nie, Y Wu, F Tian, S Lu, Q Zheng. arXiv preprint arXiv:2508.10955, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Chartsketcher: Reasoning with multimodal feedback and reflection for chart understanding</p>
+                        <p class="paper-meta">M Huang, L Zhang, J Ma, H Lai, F Xu, Y Li, W Wu, Y Wu, J Liu. arXiv preprint arXiv:2505.19076, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Unleashing the potential of model bias for generalized category discovery</p>
+                        <p class="paper-meta">W An, H Lin, J Nie, F Tian, W Shi, Y Wu, Q Wang, P Chen. Proceedings of the AAAI Conference on Artificial Intelligence 39 (15), 15365, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Using Depth-Enhanced Spatial Transformation for Student Gaze Target Estimation in Dual-View Classroom Images</p>
+                        <p class="paper-meta">H Miao, P Zhao, Y Sun, F Nan, X Zhang, Y Wu, F Tian. ICASSP 2025, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">LFSRM: Few-Shot Diagram-Sentence Matching via Local-Feedback Self-Regulating Memory</p>
+                        <p class="paper-meta">L Zhang, W Wu, J Liu, X Chang, X Hu, Y Zheng, Y Wu, Q Zheng. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Flipped classroom: Aligning teacher attention with student in generalized category discovery</p>
+                        <p class="paper-meta">H Lin, W An, J Wang, Y Chen, F Tian, M Wang, QY Wang, G Dai, J Wang. Advances in Neural Information Processing Systems 37, 60897-60935, 2024.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">MRCI: Multi-range Context Interaction for Boundary Refinement in Image Segmentation</p>
+                        <p class="paper-meta">Y Wu, W Lyu, X Liang, Q Zheng, J Wei, L Jin. International Conference on Pattern Recognition, 211-226, 2024.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">RDLNet: a novel and accurate real-world document localization method</p>
+                        <p class="paper-meta">Y Wu, Z Xu, Y Duan, Y Wu, Q Zheng, H Li, X Hu, L Jin. Proceedings of the 32nd ACM International Conference on Multimedia, 9847-9855, 2024.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Programming knowledge tracing based on heterogeneous graph representation</p>
+                        <p class="paper-meta">Y Wu, H Zhu, C Wang, F Song, H Zhu, Y Chen, Q Zheng, F Tian. Knowledge-Based Systems 300, 112161, 2024.</p>
+                    </div>
+                    <h3 class="news-year">部分专利</h3>
+                    <p class="papers-intro">申请与授权发明专利超过 140 余项，4 次获得联想集团最有价值专利奖。</p>
+                    <div class="patent-table-wrap">
+                        <table class="patent-table">
+                            <thead>
+                                <tr><th>授权日期</th><th>专利名称</th><th>专利编号</th><th>发明人</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2023.05.23</td><td>图像显示控制方法和装置</td><td>202310185874.8</td><td>武亚强等</td></tr>
+                                <tr><td>2023.04.11</td><td>一种显示处理方法、装置和电子设备</td><td>202211639256.8</td><td>武亚强等</td></tr>
+                                <tr><td>2023.02.17</td><td>学习视频生成方法、装置、电子设备及存储介质</td><td>CN202111448184.4</td><td>武亚强等</td></tr>
+                                <tr><td>2022.11.22</td><td>学生使用电子设备的控制方法、装置及电子设备</td><td>CN201911358291.0</td><td>张晓平，武亚强等</td></tr>
+                                <tr><td>2022.08.19</td><td>一种多媒体数据同步方法及装置、设备</td><td>CN202010616703.2</td><td>张晓平，武亚强等</td></tr>
+                                <tr><td>2022.04.22</td><td>一种内容显示方法及装置</td><td>CN201811150283.2</td><td>陈宏星，武亚强等</td></tr>
+                                <tr><td>2021.10.20</td><td>教室终端系统及其控制方法、控制器与主控设备</td><td>CN202010128622.8</td><td>张晓平，武亚强等</td></tr>
+                                <tr><td>2021.05.18</td><td>一种声音信息的转换方法、装置及设备</td><td>CN201710465049.8</td><td>白金才，武亚强等</td></tr>
+                                <tr><td>2020.08.04</td><td>Information processing method and apparatus, and electronic device and computer readable medium thereof</td><td>US10735918B2</td><td>Yingwen, Yaqiang Wu, et al</td></tr>
+                                <tr><td>2019.10.29</td><td>一种数据处理方法及电子设备</td><td>CN201410413299.3</td><td>武亚强等</td></tr>
+                                <tr><td>2019.02.19</td><td>Method and apparatus for file processing</td><td>US10210148B2</td><td>Yaqiang Wu, et al</td></tr>
+                                <tr><td>2018.07.03</td><td>Display method and display device</td><td>US10013730B2</td><td>Yaqiang Wu, et al</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="content-en">
-                    <h2>🎓 Education & Service</h2>
-                    <div class="content-card">
-                        <h3>Education</h3>
-                        <ul class="list-plain">
-                            <li><strong>Xi'an Jiaotong University</strong> — Ph.D., M.S., & B.S., Computer and Information Engineering</li>
-                        </ul>
+                    <h2 class="page-title">Papers and Patents</h2>
+                    <h3 class="news-year">Representative Papers</h3>
+                    <p class="papers-intro">Selected publications below. Full list on <a href="https://scholar.google.com/citations?hl=en&user=vlsW3iwAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+                    <div class="paper-item">
+                        <p class="paper-title">SketchVL: Policy Optimization via Fine-Grained Credit Assignment for Chart Understanding and More</p>
+                        <p class="paper-meta">M Huang, L Zhang, Y Li, Y Wu, J Liu. arXiv preprint arXiv:2601.05688, 2026.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>🌟 Academic & Professional Service</h3>
-                        <ul class="list-plain">
-                            <li><strong>Adjunct Professor:</strong> Computer Science, Xi'an Jiaotong University.</li>
-                            <li><strong>Senior Member:</strong> Institute of Electrical and Electronics Engineers (IEEE).</li>
-                            <li><strong>Distinguished Member:</strong> China Computer Federation (CCF).</li>
-                            <li><strong>Standing Committee Member:</strong> CCF Multimedia Technology Committee.</li>
-                            <li><strong>Standing Committee Member:</strong> CSIG Document Analysis and Recognition Committee.</li>
-                        </ul>
+                    <div class="paper-item">
+                        <p class="paper-title">Empowering multimodal llms with external tools: A comprehensive survey</p>
+                        <p class="paper-meta">W An, J Nie, Y Wu, F Tian, S Lu, Q Zheng. arXiv preprint arXiv:2508.10955, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Chartsketcher: Reasoning with multimodal feedback and reflection for chart understanding</p>
+                        <p class="paper-meta">M Huang, L Zhang, J Ma, H Lai, F Xu, Y Li, W Wu, Y Wu, J Liu. arXiv preprint arXiv:2505.19076, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Unleashing the potential of model bias for generalized category discovery</p>
+                        <p class="paper-meta">W An, H Lin, J Nie, F Tian, W Shi, Y Wu, Q Wang, P Chen. Proceedings of AAAI 39 (15), 15365, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Using Depth-Enhanced Spatial Transformation for Student Gaze Target Estimation in Dual-View Classroom Images</p>
+                        <p class="paper-meta">H Miao, P Zhao, Y Sun, F Nan, X Zhang, Y Wu, F Tian. ICASSP 2025, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">LFSRM: Few-Shot Diagram-Sentence Matching via Local-Feedback Self-Regulating Memory</p>
+                        <p class="paper-meta">L Zhang, W Wu, J Liu, X Chang, X Hu, Y Zheng, Y Wu, Q Zheng. IEEE TPAMI, 2025.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Flipped classroom: Aligning teacher attention with student in generalized category discovery</p>
+                        <p class="paper-meta">H Lin, W An, J Wang, Y Chen, F Tian, M Wang, QY Wang, G Dai, J Wang. NeurIPS 37, 60897-60935, 2024.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">MRCI: Multi-range Context Interaction for Boundary Refinement in Image Segmentation</p>
+                        <p class="paper-meta">Y Wu, W Lyu, X Liang, Q Zheng, J Wei, L Jin. ICPR, 211-226, 2024.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">RDLNet: a novel and accurate real-world document localization method</p>
+                        <p class="paper-meta">Y Wu, Z Xu, Y Duan, Y Wu, Q Zheng, H Li, X Hu, L Jin. ACM MM 2024, 9847-9855, 2024.</p>
+                    </div>
+                    <div class="paper-item">
+                        <p class="paper-title">Programming knowledge tracing based on heterogeneous graph representation</p>
+                        <p class="paper-meta">Y Wu, H Zhu, C Wang, F Song, H Zhu, Y Chen, Q Zheng, F Tian. Knowledge-Based Systems 300, 112161, 2024.</p>
+                    </div>
+                    <h3 class="news-year">Selected Patents</h3>
+                    <p class="papers-intro">Over 140 patent applications and grants; 4× Lenovo Most Valuable Patent Award.</p>
+                    <div class="patent-table-wrap">
+                        <table class="patent-table">
+                            <thead>
+                                <tr><th>Date</th><th>Title</th><th>Number</th><th>Inventors</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2023.05.23</td><td>图像显示控制方法和装置</td><td>202310185874.8</td><td>武亚强等</td></tr>
+                                <tr><td>2023.04.11</td><td>一种显示处理方法、装置和电子设备</td><td>202211639256.8</td><td>武亚强等</td></tr>
+                                <tr><td>2023.02.17</td><td>学习视频生成方法、装置、电子设备及存储介质</td><td>CN202111448184.4</td><td>武亚强等</td></tr>
+                                <tr><td>2022.11.22</td><td>学生使用电子设备的控制方法、装置及电子设备</td><td>CN201911358291.0</td><td>张晓平，武亚强等</td></tr>
+                                <tr><td>2022.08.19</td><td>一种多媒体数据同步方法及装置、设备</td><td>CN202010616703.2</td><td>张晓平，武亚强等</td></tr>
+                                <tr><td>2022.04.22</td><td>一种内容显示方法及装置</td><td>CN201811150283.2</td><td>陈宏星，武亚强等</td></tr>
+                                <tr><td>2021.10.20</td><td>教室终端系统及其控制方法、控制器与主控设备</td><td>CN202010128622.8</td><td>张晓平，武亚强等</td></tr>
+                                <tr><td>2021.05.18</td><td>一种声音信息的转换方法、装置及设备</td><td>CN201710465049.8</td><td>白金才，武亚强等</td></tr>
+                                <tr><td>2020.08.04</td><td>Information processing method and apparatus, and electronic device and computer readable medium thereof</td><td>US10735918B2</td><td>Yingwen, Yaqiang Wu, et al</td></tr>
+                                <tr><td>2019.10.29</td><td>一种数据处理方法及电子设备</td><td>CN201410413299.3</td><td>武亚强等</td></tr>
+                                <tr><td>2019.02.19</td><td>Method and apparatus for file processing</td><td>US10210148B2</td><td>Yaqiang Wu, et al</td></tr>
+                                <tr><td>2018.07.03</td><td>Display method and display device</td><td>US10013730B2</td><td>Yaqiang Wu, et al</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
 
-            <!-- 博士后招聘 -->
-            <section id="recruitment" class="content-section">
+            <!-- 5. 博士后招聘 -->
+            <section id="section-recruitment" class="page-section">
                 <div class="content-zh">
-                    <h2>🎓 企业博士后招聘</h2>
-                    <div class="content-card">
-                        <p>团队与院士团队联合招聘企业博士后（导师含国家杰青/万人计划获得者）：</p>
-                        <ul class="list-plain">
-                            <li><strong>研究方向：</strong> 生成式AI（多模态大模型、交互数字人）。</li>
-                            <li><strong>待遇：</strong> 博士毕业生可选择回归学术界或留任产业界，CV/NLP方向博士提供有竞争力的薪酬。</li>
-                        </ul>
+                    <h2 class="page-title">企业博士后招聘</h2>
+                    <div class="content-card content-card-rounded">
+                        <div class="info-box-header">招聘信息</div>
+                        <div class="info-box-body">
+                            <p class="info-text" style="margin-bottom: 14px;">团队与院士团队联合招聘企业博士后（导师含国家杰青/万人计划获得者）。</p>
+                            <div class="info-block">
+                                <h4>研究方向</h4>
+                                <p class="info-text" style="margin: 0;">生成式AI（多模态大模型、交互数字人）。</p>
+                            </div>
+                            <div class="info-block">
+                                <h4>待遇与发展</h4>
+                                <p class="info-text" style="margin: 0;">博士毕业生可选择回归学术界或留任产业界，CV/NLP 方向博士提供有竞争力的薪酬。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="content-en">
-                    <h2>🎓 Enterprise Postdoctoral Recruitment</h2>
-                    <div class="content-card">
-                        <p>Our team is jointly recruiting Enterprise Postdoctoral researchers with Academician teams (mentors include recipients of the National Science Fund for Distinguished Young Scholars/Ten Thousand Talents Program):</p>
-                        <ul class="list-plain">
-                            <li><strong>Research Direction:</strong> Generative AI (Multimodal Large Models, Interactive Digital Human).</li>
-                            <li><strong>Details:</strong> Graduates can choose to return to academia or industry. Competitive compensation is offered for Ph.D. holders in CV/NLP.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 近期新闻 -->
-            <section id="news" class="content-section">
-                <div class="content-zh">
-                    <h2>📰 近期新闻亮点</h2>
-                    <table class="news-table">
-                        <thead>
-                            <tr><th>日期</th><th>核心事件</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>2026/01/08</strong></td>
-                                <td>联想在CES发布首款个人超级AI智能体Qira，3大核心技术中「模型编排」「多智能体协作」2项由我团队研发。<br><a href="https://news.sina.com.cn/sx/2026-01-08/detail-inhfqtyr6702300.shtml" target="_blank" rel="noopener">链接</a></td>
-                            </tr>
-                            <tr><td><strong>2025/11/10</strong></td><td>西交-联想产业AI实验室3篇论文被AAAI 2026录用，其中联想主导1篇，西安交大主导2篇。</td></tr>
-                            <tr><td><strong>2025/10/21</strong></td><td>「超写实数字人技术」项目顺利通过北京市科技计划综合绩效评价。</td></tr>
-                            <tr><td><strong>2025/05/09</strong></td><td>受邀在2025中国图象图形大会「文字识别与文档智能」论坛作题为“从任务专用到通用化：基础模型时代的图像分割演进”的特邀报告。</td></tr>
-                            <tr><td><strong>2024/06/25</strong></td><td>自研向量模型<strong>Zhihui_LLM_Embedding</strong>以76.7分登顶<strong>MTEB检索榜单（全球第一）</strong>。</td></tr>
-                            <tr><td><strong>2024/03/31</strong></td><td>受邀在第一届中国具身智能大会（CEAI 2024）「具身智能与智能汽车」分论坛做技术报告。</td></tr>
-                            <tr><td><strong>2024/03/17</strong></td><td>「智慧教学环境构建中虚实融合关键技术及重大应用」项目获<strong>2023年产学研合作创新成果一等奖</strong>。</td></tr>
-                            <tr><td><strong>2024/01/09</strong></td><td>团队研发的<strong>车载智能助手</strong>在<strong>CES 2024</strong>首发，搭载自研数字人生成、知识增强车载大模型。</td></tr>
-                            <tr><td><strong>2023/09/27</strong></td><td>「数实融合精准导学关键技术及应用」项目获<strong>CCF科技进步一等奖</strong>。</td></tr>
-                            <tr><td><strong>2023/06/19</strong></td><td>团队斩获国际文档分析与识别大会（ICDAR）主办的<strong>通用文档理解（DUDE）</strong>学术竞赛冠军。</td></tr>
-                            <tr><td><strong>2022/12/27</strong></td><td>团队智慧教育解决方案获评<strong>量子位年度AI最佳解决方案TOP 10</strong>。</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="content-en">
-                    <h2>📰 Recent News Highlights</h2>
-                    <table class="news-table">
-                        <thead>
-                            <tr><th>Date</th><th>Highlight Event</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>2026/01/08</strong></td>
-                                <td>Lenovo launched its first personal super AI agent Qira at CES; 2 of the 3 core technologies—Model Orchestration and Multi-agent Collaboration—were developed by my team.<br><a href="https://news.sina.com.cn/sx/2026-01-08/detail-inhfqtyr6702300.shtml" target="_blank" rel="noopener">Link</a></td>
-                            </tr>
-                            <tr><td><strong>2025/11/10</strong></td><td>3 papers from the XJTU-Lenovo Industrial AI Lab were accepted by AAAI 2026 (1 led by Lenovo, 2 led by Xi'an Jiaotong University).</td></tr>
-                            <tr><td><strong>2025/10/21</strong></td><td>The "Ultra-realistic Digital Human Technology" project successfully passed the comprehensive performance evaluation of Beijing Science and Technology Program.</td></tr>
-                            <tr><td><strong>2025/05/09</strong></td><td>Invited to deliver a keynote speech titled "From Task-Specific to Generalization: Evolution of Image Segmentation in the Foundation Model Era" at the "Text Recognition and Document Intelligence" forum of China Graphics Conference 2025.</td></tr>
-                            <tr><td><strong>2024/06/25</strong></td><td>Self-developed vector model <strong>Zhihui_LLM_Embedding</strong> scored 76.7, topping the <strong>MTEB Retrieval Leaderboard (1st Place)</strong>.</td></tr>
-                            <tr><td><strong>2024/03/31</strong></td><td>Invited to deliver a technical report at the "Embodied AI and Smart Vehicles" sub-forum at the 1st China Embodied AI Conference (CEAI 2024).</td></tr>
-                            <tr><td><strong>2024/03/17</strong></td><td>Project "Key Technology and Major Applications of Virtual-Real Fusion in Smart Teaching Environment Construction" won <strong>First Prize of the 2023 Industry-University-Research Cooperation Innovation Award</strong>.</td></tr>
-                            <tr><td><strong>2024/01/09</strong></td><td>Team's R&D of the <strong>In-Vehicle Smart Assistant</strong> debuted at <strong>CES 2024</strong>, featuring self-developed Digital Human generation and knowledge-enhanced in-car LLM.</td></tr>
-                            <tr><td><strong>2023/09/27</strong></td><td>Project "Digital-Real Fusion for Precise Guided Learning Key Technologies and Applications" won <strong>First Prize of the CCF Science and Technology Progress Award</strong>.</td></tr>
-                            <tr><td><strong>2023/06/19</strong></td><td>Team won the <strong>Document Understanding of Everything (DUDE)</strong> academic competition organized by ICDAR (International Conference on Document Analysis and Recognition).</td></tr>
-                            <tr><td><strong>2022/12/27</strong></td><td>Team's Smart Education Solution was named a <strong>Qubit Annual AI Best Solution TOP 10</strong>.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- 联系方式 -->
-            <section id="contact" class="content-section">
-                <div class="content-zh">
-                    <h2>📬 联系方式</h2>
-                    <div class="content-card">
-                        <ul class="list-plain">
-                            <li><strong>邮箱：</strong> wuyqe@lenovo.com</li>
-                            <li><strong>谷歌学术：</strong> <a href="https://scholar.google.com/citations?hl=en&user=vlsW3iwAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
-                            <li><strong>领英：</strong> <a href="https://www.linkedin.com/in/wuadam/" target="_blank" rel="noopener">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content-en">
-                    <h2>📬 Get In Touch</h2>
-                    <div class="content-card">
-                        <ul class="list-plain">
-                            <li><strong>Email:</strong> wuyqe@lenovo.com</li>
-                            <li><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?hl=en&user=vlsW3iwAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
-                            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/wuadam/" target="_blank" rel="noopener">LinkedIn</a></li>
-                        </ul>
+                    <h2 class="page-title">Postdoc Recruitment</h2>
+                    <div class="content-card content-card-rounded">
+                        <div class="info-box-header">Recruitment</div>
+                        <div class="info-box-body">
+                            <p class="info-text" style="margin-bottom: 14px;">Our team is jointly recruiting Enterprise Postdoctoral researchers with Academician teams (mentors include recipients of the National Science Fund for Distinguished Young Scholars / Ten Thousand Talents Program).</p>
+                            <div class="info-block">
+                                <h4>Research Direction</h4>
+                                <p class="info-text" style="margin: 0;">Generative AI (Multimodal Large Models, Interactive Digital Human).</p>
+                            </div>
+                            <div class="info-block">
+                                <h4>Compensation &amp; Career</h4>
+                                <p class="info-text" style="margin: 0;">Graduates can choose to return to academia or remain in industry. Competitive compensation is offered for Ph.D. holders in CV/NLP.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -560,7 +993,18 @@
             var btnZh = document.getElementById('btn-zh');
             var btnEn = document.getElementById('btn-en');
             var navItems = document.querySelectorAll('.nav-item[data-zh][data-en]');
-            var zhTitles = { 'zh': '武亚强 (Adam Wu) - 联想人工智能技术中心 高级总监', 'en': 'Adam Wu (武亚强) - Executive Director, Lenovo AI Technology Center' };
+            var sections = document.querySelectorAll('.page-section');
+            var zhTitles = {
+                'zh': '武亚强 (Adam Wu) - 联想人工智能技术中心 高级总监',
+                'en': 'Adam Wu (武亚强) - Executive Director, Lenovo AI Technology Center'
+            };
+            var pageToSection = {
+                'basic': 'section-basic',
+                'news': 'section-news',
+                'projects': 'section-projects',
+                'papers': 'section-papers',
+                'recruitment': 'section-recruitment'
+            };
 
             function setLang(lang) {
                 document.body.classList.toggle('lang-en', lang === 'en');
@@ -571,6 +1015,37 @@
                 navItems.forEach(function(a) {
                     a.textContent = a.getAttribute(lang === 'zh' ? 'data-zh' : 'data-en');
                 });
+            }
+
+            function showPage(pageId) {
+                var targetId = pageToSection[pageId] || 'section-basic';
+                sections.forEach(function(s) {
+                    s.classList.toggle('active', s.id === targetId);
+                });
+                navItems.forEach(function(a) {
+                    a.classList.toggle('active', a.getAttribute('data-page') === pageId);
+                });
+                window.location.hash = pageId || 'basic';
+            }
+
+            function getPageFromHash() {
+                var hash = (window.location.hash || '#basic').replace('#', '');
+                return pageToSection[hash] ? hash : 'basic';
+            }
+
+            navItems.forEach(function(a) {
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage(a.getAttribute('data-page'));
+                });
+            });
+
+            window.addEventListener('hashchange', function() {
+                showPage(getPageFromHash());
+            });
+
+            if (window.location.hash) {
+                showPage(getPageFromHash());
             }
 
             btnZh.addEventListener('click', function() { setLang('zh'); });
